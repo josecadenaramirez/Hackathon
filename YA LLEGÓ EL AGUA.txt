@@ -1,0 +1,33 @@
+#include <16F887.h>
+#FUSES XT,NOWDT,NOPROTECT,PUT,NOBROWNOUT,NOLVP     
+#use delay(clock=4000000)
+
+
+#include <lcd.c>
+
+#USE standard_io(b)
+
+   void main()
+   {
+      lcd_init();                             
+      setup_timer_1(T1_INTERNAL|T1_DIV_BY_8);
+   
+   
+         while (true)
+               {
+               if (input(PIN_b6))
+                  {
+                  output_high(pin_b7);
+                  printf(LCD_PUTC, "\f  No hay agua \n      ");
+                  delay_ms(250);
+                  }
+                  
+                     else
+                      {
+                      output_LOW(pin_b7);
+                      printf(LCD_PUTC, "\f  Llego el agua");
+                      delay_ms(250);
+                      output_high(pin_b7);
+                      }
+               }
+   }
